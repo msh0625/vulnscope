@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+vulnscope/cli.py
+vulnscope/github_fetcher.py
+vulnscope/parser.py
+vulnscope.egg-info/PKG-INFO
+vulnscope.egg-info/SOURCES.txt
+vulnscope.egg-info/dependency_links.txt
+vulnscope.egg-info/entry_points.txt
+vulnscope.egg-info/requires.txt
+vulnscope.egg-info/top_level.txt
