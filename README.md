@@ -45,14 +45,6 @@ Scanning 42 dependencies against OSV database...
 
 ---
 
-## Roadmap
-
-- [ ] **Week 2** — Claude API integration for pattern-based zero-day analysis
-- [ ] **Week 3** — Zero-trust policy analyzer (IAM, RBAC, nginx config)
-- [ ] **Week 4** — Automated CVE report generation & responsible disclosure templates
-
----
-
 ## Supported ecosystems
 
 | File              | Ecosystem |
