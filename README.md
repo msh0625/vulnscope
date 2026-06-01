@@ -47,11 +47,11 @@ Scanning 42 dependencies against OSV database...
 
 ## Supported ecosystems
 
-| File              | Ecosystem |
-|-------------------|-----------|
-| `requirements.txt`| PyPI      |
-| `pyproject.toml`  | PyPI      |
-| `package.json`    | npm       |
+| File               | Ecosystem |
+| ------------------ | --------- |
+| `requirements.txt` | PyPI      |
+| `pyproject.toml`   | PyPI      |
+| `package.json`     | npm       |
 
 ---
 
