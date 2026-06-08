@@ -1,0 +1,38 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AdminAccess",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "*",
+      "Resource": "*"
+    },
+    {
+      "Sid": "S3Access",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::123456789012:root"
+      },
+      "Action": [
+        "s3:*"
+      ],
+      "Resource": "*",
+      "Condition": {}
+    },
+    {
+      "Sid": "EC2Access",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "*"
+      },
+      "Action": [
+        "ec2:*",
+        "iam:PassRole",
+        "iam:CreateUser",
+        "iam:AttachUserPolicy"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

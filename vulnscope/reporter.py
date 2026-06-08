@@ -124,3 +124,68 @@ def print_analysis(analysis) -> None:
             console.print(f"  [yellow]▸[/yellow] {r}")
 
     console.print()
+
+
+def print_policy_analysis(result) -> None:
+    """Print zero-trust policy analysis result."""
+    from rich.rule import Rule
+    from rich.table import Table
+    from rich import box
+
+    console.print()
+    console.print(Rule(f"[bold magenta]Zero-Trust Analysis — {result.filename}[/bold magenta]", style="magenta"))
+    console.print(f"[dim]Type:[/dim] {result.policy_type}")
+
+    # Score bar
+    score = result.zero_trust_score
+    filled = int(score / 5)
+    bar = "█" * filled + "░" * (20 - filled)
+    if score >= 70:
+        color = "green"
+    elif score >= 40:
+        color = "yellow"
+    else:
+        color = "red"
+    console.print(f"\n[bold]Zero-Trust Score[/bold]  [{color}]{bar}[/{color}]  [{color}]{score}/100[/{color}]\n")
+
+    # Findings table
+    if result.findings:
+        sev_order = {"CRITICAL": 0, "HIGH": 1, "MEDIUM": 2, "LOW": 3}
+        sorted_findings = sorted(result.findings, key=lambda f: sev_order.get(f.severity, 9))
+
+        table = Table(
+            title=f"[bold white]Findings ({len(result.findings)})[/bold white]",
+            box=box.ROUNDED,
+            border_style="dim",
+            expand=True,
+        )
+        table.add_column("Severity", justify="center", width=10)
+        table.add_column("Principle", width=20)
+        table.add_column("Location", width=16)
+        table.add_column("Issue", ratio=1)
+        table.add_column("Fix", ratio=1)
+
+        sev_colors = {"CRITICAL": "bold red", "HIGH": "red", "MEDIUM": "yellow", "LOW": "green"}
+        for f in sorted_findings:
+            color = sev_colors.get(f.severity, "dim")
+            table.add_row(
+                f"[{color}]{f.severity}[/{color}]",
+                f.principle_violated,
+                f"[dim]{f.location}[/dim]",
+                f.description,
+                f"[green]{f.recommendation}[/green]",
+            )
+        console.print(table)
+    else:
+        console.print("[bold green]✓ No zero-trust violations found.[/bold green]")
+
+    # Summary
+    if result.summary:
+        console.print(f"\n[bold]Summary[/bold]\n  {result.summary}\n")
+
+    # Hardened config
+    if result.hardened_config:
+        console.print("[bold magenta]Hardened config suggestion:[/bold magenta]")
+        console.print(result.hardened_config)
+
+    console.print()
